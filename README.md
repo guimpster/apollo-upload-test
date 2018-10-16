@@ -1,12 +1,15 @@
 # Apollo Client and Apollo Server
 A simple project exposing apollo client and server capabilities
 
-To start client:
-$ cd apollo-upload-client
-$ yarn
-$ yarn start
+## Installation
+Client:
 
-To start server:
-$ cd apollo-upload-server
+`$ cd apollo-upload-client
 $ yarn
-$ yarn start
+$ yarn start`
+
+Server:
+
+`$ cd apollo-upload-server
+$ yarn
+$ yarn start`
