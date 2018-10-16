@@ -13,8 +13,19 @@ class App extends Component {
         <div>
           <h2>Apollo Upload Client <span role='img' aria-label='Emoji'>🚀</span></h2>
         </div>
-        <FileUpload/>
+        <FileUpload />
+        <style>{`
+          html {
+            font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial,
+              sans-serif;
+            background-color: white;
+          }
+          body {
+            margin: 2em;
+          }
+        `}</style>
       </ApolloProvider>
+
     );
   }
 }
