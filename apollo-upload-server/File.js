@@ -1,22 +1,40 @@
-const { gql, GraphQLUpload } = require('apollo-server');
+const { gql, GraphQLUpload } = require('apollo-server-express');
 
 const typeDefs = gql`
-  scalar Upload
+  enum ServiceProviderType {
+    AMAZON
+    AZURE
+    LOCAL
+  }
 
-  type File {
-    filename: String!
-    mimetype: String!
-    encoding: String!
-    id: String
+  input UserSelfieInput {
+    id: String!
+    provider: ServiceProviderType!
+    bucketName: String
+    name: String!
+  }
+
+  type UserSelfie {
+    id: String!
+    provider: ServiceProviderType!
+    bucketName: String
+    name: String!
   }
 
   type Query {
-      _: String
+    _: String
   }
 
   type Mutation {
-    singleUpload(file: Upload!, id: String): File!
+    uploadProposalDocumentSelfie(
+      proposalId: String!
+      checklistId: String!
+      documentTypeId: String!
+      data: UserSelfieInput!
+      file: Upload!
+    ): UserSelfie
   }
+  scalar Upload
 `;
 
 const resolvers = {
@@ -27,11 +45,10 @@ const resolvers = {
         }
     },
     Mutation: {
-        async singleUpload(parent, { file, id }) {
-            console.log('File', require('util').inspect(file, { depth: null }))
-            console.log('Id: ', id);
+        async uploadProposalDocumentSelfie(parent, args) {
+            console.log('Args', require('util').inspect(args, { depth: null }))
             
-            const { stream, filename, mimetype, encoding } = await file;
+            // const { stream, filename, mimetype, encoding } = await args.file;
 
             // 1. Validate file metadata.
 
@@ -41,7 +58,7 @@ const resolvers = {
             // 3. Record the file upload in your DB.
             // const id = await recordFile( … )
 
-            return { stream, filename, mimetype, encoding, id };
+            return { ...args.data, id: "234982348487fdf80324" };
         }
     }
 };

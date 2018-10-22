@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { createUploadLink } from 'apollo-upload-client'
+import { createUploadLink } from '@kapmug/apollo-upload-client'
 import { onError } from 'apollo-link-error';
 import { ApolloLink } from 'apollo-link';
 
@@ -16,7 +16,7 @@ const client = new ApolloClient({
             if (networkError) console.log(`[Network error]: ${networkError}`);
         }),
         createUploadLink({
-            uri: "http://localhost:3005/graphql",
+            uri: "http://localhost:3000/graphql",
             credentials: 'same-origin'
         })
     ]),
